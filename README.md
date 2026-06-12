@@ -6,8 +6,8 @@
 POST-запрос на адрес [http://127.0.0.1:8000/api/v1/jwt/create/](http://127.0.0.1:8000/api/v1/jwt/create/). Тело запроса:
 ```
 {
-    "username": "string",
-    "password": "string"
+    "username": "Ваше имя пользователя",
+    "password": "Ваш пароль"
 }
 ```
 200 Удачное выполнение запроса:
@@ -38,8 +38,8 @@ POST-запрос на адрес [http://127.0.0.1:8000/api/v1/jwt/create/](htt
 POST-запрос на адрес  [http://127.0.0.1:8000/api/v1/posts/](http://127.0.0.1:8000/api/v1/posts/). Тело запроса:
 ```
 {
-    "text": "string",
-    "image": "string",
+    "text": "Текст публикации",
+    "image": "Адрес картинки(опционально)",
     "group": 0
 }
 ```
@@ -48,10 +48,10 @@ POST-запрос на адрес  [http://127.0.0.1:8000/api/v1/posts/](http://
 ```
 {
     "id": 0,
-    "author": "string",
-    "text": "string",
+    "author": "username автора публикации",
+    "text": "Текст публикации",
     "pub_date": "2019-08-24T14:15:22Z",
-    "image": "string",
+    "image": "Адрес картинки",
     "group": 0
 }
 ```

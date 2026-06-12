@@ -2,12 +2,11 @@ from datetime import datetime
 
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-from rest_framework import filters, viewsets
+from rest_framework import filters, mixins, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 
 from posts.models import Comment, Follow, Group, Post
-from .mixins import ListCreateViewSet
-from .permissions import CustomPermission, FollowPermission
+from .permissions import GroupCommentPostPermission, FollowPermission
 from .serializers import (
     CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer)
 
@@ -17,13 +16,13 @@ User = get_user_model()
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (CustomPermission,)
+    permission_classes = (GroupCommentPostPermission,)
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (CustomPermission,)
+    permission_classes = (GroupCommentPostPermission,)
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
@@ -34,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = (CustomPermission,)
+    permission_classes = (GroupCommentPostPermission,)
 
     def get_queryset(self):
         post_id = self.kwargs['post_id']
@@ -48,7 +47,9 @@ class CommentViewSet(viewsets.ModelViewSet):
             created=datetime.now())
 
 
-class FollowViewSet(ListCreateViewSet):
+class FollowViewSet(
+    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
     permission_classes = (FollowPermission,)

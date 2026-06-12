@@ -5,6 +5,7 @@ User = get_user_model()
 MAX_LENGTH = 200
 
 
+# При смене имени модели падают тесты.
 class Group(models.Model):
     title = models.CharField(max_length=MAX_LENGTH)
     slug = models.SlugField(unique=True)

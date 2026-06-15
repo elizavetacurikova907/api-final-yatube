@@ -14,4 +14,4 @@ app_name = 'api'
 urlpatterns = [
     path('v1/', include('djoser.urls.jwt')),
     path('', include(router.urls))
-]
+]   

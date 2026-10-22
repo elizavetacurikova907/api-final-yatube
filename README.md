@@ -116,4 +116,4 @@ python3 manage.py runserver
 ```
 ## Авторы
 * **Шаблон:** yandex-praktikum
-* **Доработка проекта:** elizavetacurikova907
+* **Доработка проекта:** elizavetacurikova907@gmail.com
